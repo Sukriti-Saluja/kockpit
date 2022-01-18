@@ -1,0 +1,63 @@
+{
+	"name": "EmpSales",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "EmpSales",
+						"type": "DataFlowReference",
+						"parameters": {
+							"FileName": {
+								"value": "@pipeline().parameters.FileName",
+								"type": "Expression"
+							},
+							"outputFileName": "'E3Sales'"
+						},
+						"datasetParameters": {
+							"source1": {
+								"FileName": {
+									"value": "@pipeline().parameters.FileName",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"parameters": {
+			"FileName": {
+				"type": "array"
+			},
+			"OutputFileName": {
+				"type": "string",
+				"defaultValue": "default"
+			}
+		},
+		"variables": {
+			"FileName": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-01-14T11:49:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

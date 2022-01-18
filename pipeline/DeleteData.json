@@ -1,0 +1,93 @@
+{
+	"name": "DeleteData",
+	"properties": {
+		"activities": [
+			{
+				"name": "listdate",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "datelist",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "eachdate",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "listdate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('listdate').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Test1_copy1",
+							"type": "Delete",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "aniketpsrawdata",
+									"type": "DatasetReference",
+									"parameters": {
+										"foldername": "@Item().Datelist"
+									}
+								},
+								"enableLogging": false,
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"fileListPath": "aniketcopy/deletedata.txt",
+									"enablePartitionDiscovery": false
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "AniketPS"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-12-27T09:29:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

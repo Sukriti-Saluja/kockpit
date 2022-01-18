@@ -1,0 +1,23 @@
+{
+	"name": "Exceloutput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSgen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "sheet1",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "output.xlsx",
+				"folderPath": "GSK",
+				"fileSystem": "poc"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "blobinputds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blobLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "container.txt",
+				"folderPath": "input",
+				"container": "container51"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

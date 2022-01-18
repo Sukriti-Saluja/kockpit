@@ -1,0 +1,41 @@
+{
+	"name": "pipeline3",
+	"properties": {
+		"activities": [
+			{
+				"name": "Delete",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "aniketpsrawdata",
+						"type": "DatasetReference",
+						"parameters": {
+							"foldername": "2020-01-01"
+						}
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"fileListPath": "aniketcopy/deletedata.txt",
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "AniketPS"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-12-27T11:25:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

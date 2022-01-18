@@ -1,0 +1,32 @@
+{
+	"name": "EmpSales",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "EmpSalesInput",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "EmpSalesOutput",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Filter1"
+				}
+			],
+			"script": "parameters{\n\tFileName as string[] (['Emp1','Emp2','Emp3','Emp4']),\n\toutputFileName as string ('E3Sales')\n}\nsource(output(\n\t\tEmpId as string,\n\t\tEmpName as string,\n\t\tSales as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:['Training/EmpSales/*.csv']) ~> source1\nsource1 filter(EmpId=='E3') ~> Filter1\nFilter1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tEmpId as string,\n\t\tEmpName as string,\n\t\tSales as string\n\t),\n\tpartitionFileNames:[($outputFileName)],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1"
+		}
+	}
+}

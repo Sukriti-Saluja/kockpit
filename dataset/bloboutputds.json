@@ -1,0 +1,27 @@
+{
+	"name": "bloboutputds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blobLS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"dirname": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": {
+					"value": "@dataset().dirname",
+					"type": "Expression"
+				},
+				"container": "container51"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

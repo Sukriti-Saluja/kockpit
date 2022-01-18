@@ -1,0 +1,9 @@
+{
+	"name": "ConfiguratorV2",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5c085959-f4be-4b14-a7d7-1b8864e5a098",
+		"tenantId": "90d12e33-ad5e-4e82-8b5e-82bff0658ae0"
+	}
+}
